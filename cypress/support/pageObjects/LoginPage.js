@@ -4,16 +4,36 @@ class LoginPage {
         cy.visit('qa_bank.html')
     }
 
+    get loginInput(){
+        return cy.get("[data-cy='input-login-email']")
+    }
+
+    get senhaInput(){
+        return cy.get("[data-cy='input-login-password']")
+    }
+
+    get entrarButton(){
+        return cy.get("[data-cy='btn-login']")
+    }
+
+    get nomeDisplay(){
+        return cy.get("[data-cy='user-name-display']")
+    }
+
+    get credenciasInvalidasMsg(){
+        return cy.get('[data-cy="login-message"]')
+    }
+    
     preencherEmail(email){
-        cy.get("[data-cy='input-login-email']").type(email)
+        this.loginInput.type(email)
     }
 
     preencherSenha(senha){
-        cy.get("[data-cy='input-login-password']").type(senha)
+        this.senhaInput.type(senha)
     }
 
     clicarEmEntrar(){
-        cy.get("[data-cy='btn-login']").click()
+        this.entrarButton.click()
     }
 
     realizarLogin(email,senha){
@@ -23,7 +43,11 @@ class LoginPage {
     }
 
     validarNomeDoUsuario(nome){
-        cy.get("[data-cy='user-name-display']").should('have.text', nome)
+        this.nomeDisplay.should('have.text', nome)
+    }
+
+    validarMensagemCredenciaisInvalidas(){
+        this.credenciasInvalidasMsg.should('have.text','Email ou senha inválidos.')
     }
 
 }

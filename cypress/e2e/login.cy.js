@@ -1,6 +1,7 @@
 import loginPage from "../support/pageObjects/LoginPage"
 
 describe('Login', () => {
+
   it('Com sucesso - Usuario Admin', () => {
     //ARRANGE
     loginPage.visitar()
@@ -11,4 +12,17 @@ describe('Login', () => {
     //ASSERT
     loginPage.validarNomeDoUsuario('Admin do Sistema')
   }) 
+
+  it('Com credenciais invalidas - Usuario Admin', () => {
+    //ARRANGE
+    loginPage.visitar()
+
+    //ACT
+    loginPage.realizarLogin("admin@qabank.com", "admin123334")
+    
+    //ASSERT
+    loginPage.validarMensagemCredenciaisInvalidas()
+
+  }) 
+
 })
